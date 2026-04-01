@@ -1,0 +1,52 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/seiri-app/kubeagent
+  pullPolicy: Always
+  tag: "1.0"
+
+seiri:
+  backendUrl: "https://cloud.seiri.app"
+  # REQUIRED — must be provided via --set or values override
+  authToken: "" # TODO: the token provided by the seiri.app 
+  clusterId: "" # TODO: the cluster ID registered in seiri.app
+
+serviceAccount:
+  create: true
+  name: "seiri-kube-agent"
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 65532
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  seccompProfile:
+    type: RuntimeDefault
+
+probes:
+  liveness:
+    path: /healthz
+    port: 8081
+    initialDelaySeconds: 15
+    periodSeconds: 20
+  readiness:
+    path: /readyz
+    port: 8081
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+

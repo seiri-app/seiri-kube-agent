@@ -1,0 +1,15 @@
+apiVersion: monitoring.seiri.app/v1alpha1 # The apiVersion of the custom resource, which should match the version defined in the CRD
+kind: HealthCheck                         # The kind of the custom resource, which should be "HealthCheck" as defined in the CRD
+metadata:
+  name: check-test                        # The name of the HealthCheck resource (e.g., check-test)
+  namespace: default                      # Optional: if not specified, it will be created in the same namespace as the operator 
+spec:
+  targetRef:
+    apiVersion: apps/v1                   # The apiVersion of the target resource (e.g., apps/v1)
+    kind: Deployment                      # The kind of the target resource (e.g., Deployment, Pod, Job)
+    name: my-app                          # The name of the Kubernetes resource to monitor (e.g., Deployment, Pod, Job)
+  interval: 10s                           # Check interval (e.g., 10s, 1m)
+  checkID: "chk-test-001"                 # This will be the name displayed in seiri.app
+  tags:
+    env: development                      # Optional tags for better organization and filtering in seiri.app
+    region: local                         # Optional tags for better organization and filtering in seiri.app
