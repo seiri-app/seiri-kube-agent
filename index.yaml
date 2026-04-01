@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  seiri-kube-agent:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-04-01T15:27:54.622709448Z"
+    description: Seiri HealthCheck operator for Kubernetes — automated service health
+      monitoring and incident detection
+    digest: ad4e9b3960062f8d623228a19580f5a19cc74ad893438ac610065e88214a263a
+    name: seiri-kube-agent
+    type: application
+    urls:
+    - https://seiri-app.github.io/seiri-kube-agent/seiri-kube-agent-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-04-01T15:27:54.621261194Z"
